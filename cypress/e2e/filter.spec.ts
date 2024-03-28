@@ -15,7 +15,7 @@ describe('filter', () => {
   beforeEach(() => {
     cy.loginAsTestUser()
     devicesListPage.load()
-    // TODO reset demo data
+    cy.resetDemoData()
   })
 
   it('Can create a filter', () => {

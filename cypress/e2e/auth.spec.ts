@@ -3,9 +3,9 @@ import DevicesListPage from '../pages/devices-list.page'
 const devicesListPage = new DevicesListPage()
 describe('Authorization', () => {
   it('requires authorizations', () => {
-    cy.visit('/')
-      cy.get('#username')
-      cy.get('#password')
+    cy.visit('/hyuperion_enterprises')
+    cy.get('#username').should('be.visible')
+    cy.get('#password').should('be.visible')
   })
 
   it('logs in with test user', () => {
@@ -13,11 +13,10 @@ describe('Authorization', () => {
     devicesListPage.load()
   })
 
-
   it('log out affordance exists for users', () => {
     cy.loginAsTestUser()
     devicesListPage.load()
-    cy.get('[href="/logout"]')
+    cy.get('[href="/logout"]').should('be.visible')
   })
 
   it('logs out', () => {
@@ -25,7 +24,8 @@ describe('Authorization', () => {
     cy.loginAsTestUser()
     devicesListPage.load()
     cy.get('[href="/logout"]').click()
-      cy.get('input#username')
-      cy.get('input#password')
+    cy.get('input#username')
+    cy.get('input#password')
+    cy.contains('button', 'Log in').should('be.visible')
   })
 })

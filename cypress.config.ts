@@ -11,9 +11,9 @@ export default defineConfig({
     baseUrl: 'https://houston-staging.pdq.tools',
     specPattern: 'cypress/e2e/**/*.{js,jsx,ts,tsx}',
     defaultCommandTimeout: 30000,
-    supportFile: "cypress/support/commands.ts",
+    supportFile: 'cypress/support/commands.ts',
     viewportHeight: 1080,
     viewportWidth: 1920,
     video: false
-  },
+  }
 })

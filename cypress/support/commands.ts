@@ -23,31 +23,28 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-import 'cypress-wait-until';
+import 'cypress-wait-until'
 
 import DeviceDetailsPage from '../pages/device-details.page'
 import DevicesListPage from '../pages/devices-list.page'
 import { aliasQuery, hasOperationName } from '../utils/graphql-test-utils'
 
-
 const devicesListPage = new DevicesListPage()
 const deviceDetailsPage = new DeviceDetailsPage()
-const defaultUser = 'default'
-
+const defaultUser = 'd.jorgy@qatestpdq.com'
 
 Cypress.Commands.add('loginAsTestUser', (userKey: string = defaultUser) => {
   Cypress.log({
     name: 'loginAsTestUser',
     displayName: 'login',
-    message: `starting login as test user`,
+    message: `starting login as test user`
   })
   cy.session(userKey, () => {
-    // TODO login as test user
-    cy.visit('/')
-
-
-    // a cookie for _houston_key is set
-    // when the user logs in
+    // login as test user
+    cy.visit('/hyuperion_enterprises')
+    cy.get('#username').type(defaultUser)
+    cy.get('#password').type('swmwrkPdq@1!')
+    cy.contains('button', 'Log in').click()
   })
 })
 
@@ -55,8 +52,11 @@ Cypress.Commands.add('resetDemoData', () => {
   Cypress.log({
     name: 'resetDemoData',
     displayName: 'reset',
-    message: `resetting demo data for current org`,
+    message: `resetting demo data for current org`
   })
+
+  cy.get('#debug-header').click()
+  cy.contains('button', 'Reset demo data').click()
 })
 
 Cypress.Commands.add('getFirstDevice', () => {
