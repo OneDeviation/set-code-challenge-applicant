@@ -20,17 +20,49 @@ describe('filter', () => {
 
   it('Can create a filter', () => {
     devicesListPage.openFilterModal()
-    filterModal.fillTextFilter('0', 'Software', 'Name', 'contains', 'edge')
+    filterModal.fillTextFilter('0', 'Device', 'Name', 'contains', 'empty')
     filterModal.applyFilter()
-    //TODO validate filter only shows the correct devices
+    devicesListPage.selectAll()
+    cy.get('.MuiBox-root.css-0')
+      .invoke('text')
+      .then((text) => {
+        expect(text).to.contain('1')
+      })
+    cy.contains('[data-field="name"] a', 'Dummy Data empty memory')
+      .invoke('text')
+      .then((text) => {
+        expect(text).to.contain('empty')
+      })
+
+    cy.get('[data-field="name"] a')
+      .invoke('text')
+      .then((text) => {
+        expect(text).to.contain('empty')
+      })
   })
 
   it('Can save a group', () => {
-    let groupName = 'has edge'
+    let groupName = 'Name contains empty'
     devicesListPage.openFilterModal()
-    filterModal.fillTextFilter('0', 'Software', 'Name', 'contains', 'edge')
+    filterModal.fillTextFilter('0', 'Device', 'Name', 'contains', 'empty')
     filterModal.saveGroup(groupName)
-    devicesListPage.getGroupTab(groupName)
-    //TODO validate saved group only shows the correct devices
+    devicesListPage.getGroupTab(groupName).click()
+    devicesListPage.selectAll()
+    cy.get('.MuiBox-root.css-0')
+      .invoke('text')
+      .then((text) => {
+        expect(text).to.contain('1')
+      })
+    devicesListPage
+      .getGroupTabCount(groupName)
+      .invoke('text')
+      .then((text) => {
+        expect(text).to.contain('1')
+      })
+    cy.get('[data-field="name"] a')
+      .invoke('text')
+      .then((text) => {
+        expect(text).to.contain('empty')
+      })
   })
 })

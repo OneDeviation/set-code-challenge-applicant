@@ -4,7 +4,7 @@ class DevicesListPage {
       name: 'loadDevicesListPage',
       // shorter name for the Command Log
       displayName: 'load',
-      message: `Loading devices list page`,
+      message: `Loading devices list page`
     })
     cy.visit('/', { log: false })
     cy.contains('All devices', { timeout: 10000, log: false })

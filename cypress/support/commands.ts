@@ -56,7 +56,7 @@ Cypress.Commands.add('resetDemoData', () => {
   })
 
   cy.get('#debug-header').click()
-  cy.contains('button', 'Reset demo data').click()
+  cy.contains('button', 'Reset fixed demo data').click()
 })
 
 Cypress.Commands.add('getFirstDevice', () => {
